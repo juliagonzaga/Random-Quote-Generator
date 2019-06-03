@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Quotes</title>
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <div id="quote-box">
+      <p class="quote">Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.</p>
+      <p class="source">Patrick McKenzie<span class="citation">Twitter</span><span class="year">2016</span></p>
+    </div>
+
+    <button id="loadQuote">Show another quote</button>
+
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>

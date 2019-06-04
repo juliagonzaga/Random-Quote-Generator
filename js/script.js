@@ -100,7 +100,7 @@ function getRandomQuote(quotesArr){
 * This function generates a random number that will be used in getting a random color.
 * @returns {integer}
 */
-function randomRGB (){
+function getRandomRGB (){
     return Math.floor(Math.random() * 256);
 }
 
@@ -108,11 +108,11 @@ function randomRGB (){
 * This function returns a random rgb color e.g. rgb(17,98,178).
 * @returns {string}
 */
-function randomColor(){
+function getRandomColor(){
     let color = 'rgb(';
-    color += randomRGB() + ',';
-    color += randomRGB() + ',';
-    color += randomRGB() + ')';
+    color += getRandomRGB() + ',';
+    color += getRandomRGB() + ',';
+    color += getRandomRGB() + ')';
     return color;
 }
 
@@ -144,7 +144,7 @@ function printQuote(){
 */
     div.innerHTML = html + '<p class= "tags">' + 'tags: ' + ranQuote.tags + '</p>';
 // A random background color is generated every quote.    
-    document.body.style.backgroundColor = randomColor();
+    document.body.style.backgroundColor = getRandomColor();
 }
 
 // If the "show another quote" button is not clicked for 15s, the page will automatically display another random quote.

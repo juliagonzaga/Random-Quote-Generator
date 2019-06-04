@@ -73,7 +73,11 @@ var quotes = [
 // This holds all the quotes already been displayed.
 var seed =[];
 
-//This function generates a random quote from the list of quotes above
+/**
+ * This function generates a random quote from the list of quotes above.
+ * @param quotesArr {array}
+ * @returns {object}
+ */
 function getRandomQuote(quotesArr){
 // generates a random number to be used as an index of the quotes array.
 // the maximum number is based on the length of the array.

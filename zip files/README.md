@@ -1,1 +1,0 @@
-# Random Quote Generator

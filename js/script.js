@@ -5,7 +5,7 @@ project 1 - A Random Quote Generator
 
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
-//
+//A list of quotes and some other properties that will be randomly printed on the user's screen thereafter.
 var quotes = [
   { 
     quote: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
@@ -68,28 +68,35 @@ var quotes = [
     year: 2012,
     tags: "programming"
   }
-];
+];  
 
+// This holds all the quotes already been displayed.
+var seed =[];
 
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
-
-function getRandomQuote(getRandomObj){
-  let randomIndex;
-  let randomQuote;
-  randomIndex = Math.floor(Math.random() * 10);
-  randomIndex = parseInt(randomIndex);
-  randomQuote = getRandomObj[randomIndex];
+//This function generates a random quote from the list of quotes above
+function getRandomQuote(quotesArr){
+// generates a random number to be used as an index of the quotes array.
+// the maximum number is based on the length of the array.
+  let randomIndex; 
+      randomIndex = Math.round(Math.random() * (quotesArr.length - 1));
+// if all the quotes were already displayed, empty the seed array to start again.
+  if(seed.length === quotesArr.length){
+      seed =[];
+  }
+// to avoid repitition, this will generate another random quote if a quote has already been displayed.
+  if(seed.indexOf(randomIndex) !== -1){
+      return getRandomQuote(quotesArr);
+  }
+// quotes that were already printed are pushed to fill in the seed array and are used for comparison on the new random quote generated.  
+  seed.push(randomIndex);
+  return quotesArr[randomIndex];
 }
 
-
+// This function generates a random number used in getting a random color.
 function randomRGB (){
     return Math.floor(Math.random() * 256);
 }
-
+// This function returns a random rgb color.
 function randomColor(){
     let color = 'rgb(';
     color += randomRGB() + ',';
@@ -97,36 +104,37 @@ function randomColor(){
     color += randomRGB() + ')';
     return color;
 }
-
 /***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
+This funtion displays the random quotes generated.
 ***/
 function printQuote(){
   let ranQuote = getRandomQuote(quotes);
+// adding objects to the html using the element Id
   let div = document.getElementById('quote-box');
-  let html ='';
-      html += '<p class="quote">' + ranQuote.quote + '</p>';
+  let html = '';
+      html = '<p class="quote">' + ranQuote.quote + '</p>';
       html += '<p class="source">' +  ranQuote.source;
+// Displays the "citation" property if there is any.      
     if('citation' in ranQuote )
     {
       html += '<span class="citation">' + ranQuote.citation + '</span>';
     }
+// Displays the "year" property if there is any.
     if('year' in ranQuote)
     {
       html += '<span class="year">' + ranQuote.year + '</span>';
     }
+/*
+  - All html strings concatenation were inserted to the index.html div.
+  - An additional "tags" property is added to index.html div.
+  ** I added a style for the "tags" property in styles.css.
+*/
     div.innerHTML = html + '<p class= "tags">' + 'tags: ' + ranQuote.tags + '</p>';
+// A random background color is generated every quote.    
     document.body.style.backgroundColor = randomColor();
 }
+
+// If the "show another quote" button is not clicked for 10s, the page will automatically display another random quote.
 setInterval(printQuote, 10000);
 
 /***

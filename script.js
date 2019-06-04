@@ -6,9 +6,7 @@ project 1 - A Random Quote Generator
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
 
-
-// This holds all the quotes that were already been displayed.
-var seed =[];
+var displayedQuotes =[];
 
 // A list of quotes and some other properties that will be randomly printed on the user's screen thereafter.
 var quotes = [
@@ -81,20 +79,22 @@ var quotes = [
  * @returns {object}
  */
 function getRandomQuote(quotesArr){
-// generates a random number to be used as an index of the quotes array.
-// the maximum number is based on the length of the array.
+// Generates a random number to be used as an index of the quotes array.
+// The maximum number is based on the length of the array.
   let randomIndex; 
       randomIndex = Math.round(Math.random() * (quotesArr.length - 1));
-// if all the quotes were already displayed, empty the seed array to start again.
-  if(seed.length === quotesArr.length){
-      seed =[];
+// If all the quotes were already displayed, empty the displayedQuotes array to start again.
+  if(displayedQuotes.length === quotesArr.length){
+      displayedQuotes =[];
   }
-// to avoid repitition, this will generate another random quote if a quote has already been displayed.
-  if(seed.indexOf(randomIndex) !== -1){
+// To avoid repitition, this will generate another random quote if a quote has already been displayed.
+  if(displayedQuotes.indexOf(randomIndex) !== -1){
       return getRandomQuote(quotesArr);
   }
-// quotes that were already printed are pushed to fill in the seed array and are used for comparison on the new random quote generated.  
-  seed.push(randomIndex);
+/* Quotes that were already printed are pushed to fill in the displayedQuotes array 
+   and are used for comparison on the new random quote generated.  
+*/
+  displayedQuotes.push(randomIndex);
   return quotesArr[randomIndex];
 }
 
@@ -124,7 +124,7 @@ function getRandomColor(){
 */
 function printQuote(){
   let ranQuote = getRandomQuote(quotes);
-// adding objects to the html using the element Id
+// Adding objects to the html using the element Id.
   let div = document.getElementById('quote-box');
   let html = '';
       html = '<p class="quote">' + ranQuote.quote + '</p>';
@@ -140,7 +140,7 @@ function printQuote(){
       html += '<span class="year">' + ranQuote.year + '</span>';
     }
 /*
-  * All html strings concatenation were inserted to the index.html div.
+  * All html strings concatenation will be inserted to the index.html div.
   * An additional "tags" property is added to index.html div.
   *** I added a style for the "tags" property in styles.css.
 */
@@ -149,7 +149,7 @@ function printQuote(){
     document.body.style.backgroundColor = getRandomColor();
 }
 
-// If the "show another quote" button is not clicked for 15s, the page will automatically display another random quote.
+// Auto - refresh the quote after 15 seconds.
 setInterval(printQuote, 15000);
 
 /***

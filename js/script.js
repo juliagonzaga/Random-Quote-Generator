@@ -5,7 +5,10 @@ project 1 - A Random Quote Generator
 
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
-//A list of quotes and some other properties that will be randomly printed on the user's screen thereafter.
+// This holds all the quotes that were already been displayed.
+var seed =[];
+
+// A list of quotes and some other properties that will be randomly printed on the user's screen thereafter.
 var quotes = [
   { 
     quote: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
@@ -70,10 +73,7 @@ var quotes = [
   }
 ];  
 
-// This holds all the quotes already been displayed.
-var seed =[];
-
-/**
+/*
  * This function generates a random quote from the list of quotes above.
  * @param quotesArr {array}
  * @returns {object}
@@ -96,11 +96,18 @@ function getRandomQuote(quotesArr){
   return quotesArr[randomIndex];
 }
 
-// This function generates a random number used in getting a random color.
+/*
+* This function generates a random number that will be used in getting a random color.
+* @returns {integer}
+*/
 function randomRGB (){
     return Math.floor(Math.random() * 256);
 }
-// This function returns a random rgb color.
+
+/*
+* This function returns a random rgb color e.g. rgb(17,98,178).
+* @returns {string}
+*/
 function randomColor(){
     let color = 'rgb(';
     color += randomRGB() + ',';
@@ -108,9 +115,11 @@ function randomColor(){
     color += randomRGB() + ')';
     return color;
 }
-/***
-This funtion displays the random quotes generated.
-***/
+
+/*
+* This funtion prints the generated random quote to the web page.
+* @returns {void}
+*/
 function printQuote(){
   let ranQuote = getRandomQuote(quotes);
 // adding objects to the html using the element Id
@@ -129,17 +138,17 @@ function printQuote(){
       html += '<span class="year">' + ranQuote.year + '</span>';
     }
 /*
-  - All html strings concatenation were inserted to the index.html div.
-  - An additional "tags" property is added to index.html div.
-  ** I added a style for the "tags" property in styles.css.
+  * All html strings concatenation were inserted to the index.html div.
+  * An additional "tags" property is added to index.html div.
+  *** I added a style for the "tags" property in styles.css.
 */
     div.innerHTML = html + '<p class= "tags">' + 'tags: ' + ranQuote.tags + '</p>';
 // A random background color is generated every quote.    
     document.body.style.backgroundColor = randomColor();
 }
 
-// If the "show another quote" button is not clicked for 10s, the page will automatically display another random quote.
-setInterval(printQuote, 10000);
+// If the "show another quote" button is not clicked for 15s, the page will automatically display another random quote.
+setInterval(printQuote, 15000);
 
 /***
   When the "Show another quote" button is clicked, the event listener 

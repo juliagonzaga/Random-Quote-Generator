@@ -7,7 +7,8 @@ project 1 - A Random Quote Generator
 
 
 var displayedQuotes =[];
-
+var IDLE_TIMER_IN_MILISECONDS = 15000;
+var idleTimer;
 // A list of quotes and some other properties that will be randomly printed on the user's screen thereafter.
 var quotes = [
   { 
@@ -79,8 +80,10 @@ var quotes = [
  * @returns {object}
  */
 function getRandomQuote(quotesArr){
-// Generates a random number to be used as an index of the quotes array.
-// The maximum number is based on the length of the array.
+/* 
+ * Generate a random number to be used as an index of the quotes array.
+ * The maximum number is based on the number of indexes inside the array.
+ */
   let randomIndex; 
       randomIndex = Math.round(Math.random() * (quotesArr.length - 1));
 // If all the quotes were already displayed, empty the displayedQuotes array to start again.
@@ -91,25 +94,23 @@ function getRandomQuote(quotesArr){
   if(displayedQuotes.indexOf(randomIndex) !== -1){
       return getRandomQuote(quotesArr);
   }
-/* Quotes that were already printed are pushed to fill in the displayedQuotes array 
-   and are used for comparison on the new random quote generated.  
-*/
+// Quotes that were already printed are pushed to fill in the displayedQuotes array and are used for comparison on the new random quote generated.  
   displayedQuotes.push(randomIndex);
   return quotesArr[randomIndex];
 }
 
 /*
-* This function generates a random number that will be used in getting a random color.
-* @returns {integer}
-*/
+ * This function generates a random number that will be used in getting a random color.
+ * @returns {integer}
+ */
 function getRandomRGB (){
     return Math.floor(Math.random() * 256);
 }
 
 /*
-* This function returns a random rgb color e.g. rgb(17,98,178).
-* @returns {string}
-*/
+ * This function returns a random rgb color e.g. rgb(17,98,178).
+ * @returns {string}
+ */
 function getRandomColor(){
     let color = 'rgb(';
     color += getRandomRGB() + ',';
@@ -119,11 +120,14 @@ function getRandomColor(){
 }
 
 /*
-* This funtion prints the generated random quote to the web page.
-* @returns {void}
-*/
+ * This funtion prints the generated random quote to the web page.
+ * @returns {void}
+ */
 function printQuote(){
   let ranQuote = getRandomQuote(quotes);
+  let ranColor = getRandomColor();
+// Reset the timer every time user clicks the button
+  clearInterval(idleTimer);
 // Adding objects to the html using the element Id.
   let div = document.getElementById('quote-box');
   let html = '';
@@ -140,17 +144,22 @@ function printQuote(){
       html += '<span class="year">' + ranQuote.year + '</span>';
     }
 /*
-  * All html strings concatenation will be inserted to the index.html div.
-  * An additional "tags" property is added to index.html div.
-  *** I added a style for the "tags" property in styles.css.
-*/
+ * All html strings concatenation will be inserted to the index.html div.
+ * An additional "tags" property is added to index.html div.
+ *** I added a style for the "tags" property in styles.css.
+ */
     div.innerHTML = html + '<p class= "tags">' + 'tags: ' + ranQuote.tags + '</p>';
 // A random background color is generated every quote.    
-    document.body.style.backgroundColor = getRandomColor();
+  document.body.style.backgroundColor = ranColor;
+// The color of the button should match the random color generated everytime the quote changes.  
+  document.getElementById('loadQuote').style.backgroundColor = ranColor;
+
+// Start the timer
+    idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);
 }
 
 // Auto - refresh the quote after 15 seconds.
-setInterval(printQuote, 15000);
+idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);
 
 /***
   When the "Show another quote" button is clicked, the event listener 

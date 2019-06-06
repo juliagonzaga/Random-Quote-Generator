@@ -112,11 +112,7 @@ function getRandomRGB (){
  * @returns {string}
  */
 function getRandomColor(){
-    let color = 'rgb(';
-    color += getRandomRGB() + ',';
-    color += getRandomRGB() + ',';
-    color += getRandomRGB() + ')';
-    return color;
+    return `rgb(${getRandomRGB()},${getRandomRGB()},${getRandomRGB()})`
 }
 
 /*
@@ -124,35 +120,35 @@ function getRandomColor(){
  * @returns {void}
  */
 function printQuote(){
-  let ranQuote = getRandomQuote(quotes);
-  let ranColor = getRandomColor();
+  let randomQuote = getRandomQuote(quotes);
+  let randomColor = getRandomColor();
 // Reset the timer every time user clicks the button
   clearInterval(idleTimer);
 // Adding objects to the html using the element Id.
   let div = document.getElementById('quote-box');
-  let html = '';
-      html = '<p class="quote">' + ranQuote.quote + '</p>';
-      html += '<p class="source">' +  ranQuote.source;
+  let html = `<p class="quote"> ${randomQuote.quote}</p>
+              <p class="source"> ${randomQuote.source}`
 // Displays the "citation" property if there is any.      
-    if('citation' in ranQuote )
+    if('citation' in randomQuote )
     {
-      html += '<span class="citation">' + ranQuote.citation + '</span>';
+      html += `<span class="citation">${randomQuote.citation}</span>`
     }
 // Displays the "year" property if there is any.
-    if('year' in ranQuote)
+    if('year' in randomQuote)
     {
-      html += '<span class="year">' + ranQuote.year + '</span>';
+      html += `<span class="year">${randomQuote.year}</span>`
     }
+      html += `<p class= "tags"> tags: ${randomQuote.tags}</p>`
 /*
  * All html strings concatenation will be inserted to the index.html div.
  * An additional "tags" property is added to index.html div.
  *** I added a style for the "tags" property in styles.css.
  */
-    div.innerHTML = html + '<p class= "tags">' + 'tags: ' + ranQuote.tags + '</p>';
+  div.innerHTML = html;
 // A random background color is generated every quote.    
-  document.body.style.backgroundColor = ranColor;
+  document.body.style.backgroundColor = randomColor;
 // The color of the button should match the random color generated everytime the quote changes.  
-  document.getElementById('loadQuote').style.backgroundColor = ranColor;
+  document.getElementById('loadQuote').style.backgroundColor = randomColor;
 
 // Start the timer
     idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);

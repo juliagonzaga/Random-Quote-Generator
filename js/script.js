@@ -151,15 +151,15 @@ function printQuote(){
   document.getElementById('loadQuote').style.backgroundColor = randomColor;
 
 // Start the timer
-    idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);
+  idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);
 }
 
 // Auto - refresh the quote after 15 seconds.
-idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);
+  idleTimer = setInterval(printQuote, IDLE_TIMER_IN_MILISECONDS);
 
 /***
   When the "Show another quote" button is clicked, the event listener 
   below will be triggered, and it will call, or "invoke", the `printQuote` 
   function. 
 ***/
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+  document.getElementById('loadQuote').addEventListener("click", printQuote, false);

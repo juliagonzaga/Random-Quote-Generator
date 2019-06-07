@@ -99,7 +99,7 @@ function getRandomQuote(quotesArr){
   return quotesArr[randomIndex];
 }
 
-/*
+/*  
  * This function generates a random number that will be used in getting a random color.
  * @returns {integer}
  */
@@ -122,8 +122,8 @@ function printQuote(){
   clearInterval(idleTimer);
 // Adding objects to the html using the element Id.
   let div = document.getElementById('quote-box');
-  let html = `<p class="quote"> ${randomQuote.quote}</p>
-              <p class="source"> ${randomQuote.source}`
+  let html = `<p class="quote"> ${randomQuote.quote}</p>`
+      html += `<p class="source"> ${randomQuote.source}`
 // Displays the "citation" property if there is any.      
     if('citation' in randomQuote )
     {

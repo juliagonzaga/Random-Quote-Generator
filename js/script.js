@@ -103,17 +103,13 @@ function getRandomQuote(quotesArr){
  * This function generates a random number that will be used in getting a random color.
  * @returns {integer}
  */
-function getRandomRGB (){
-    return Math.floor(Math.random() * 256);
-}
+let getRandomRGB = () => Math.floor(Math.random() * 256);
 
 /*
  * This function returns a random rgb color e.g. rgb(17,98,178).
  * @returns {string}
  */
-function getRandomColor(){
-    return `rgb(${getRandomRGB()},${getRandomRGB()},${getRandomRGB()})`
-}
+let getRandomColor = () => `rgb(${getRandomRGB()},${getRandomRGB()},${getRandomRGB()})`
 
 /*
  * This funtion prints the generated random quote to the web page.

@@ -109,7 +109,7 @@ let getRandomRGB = () => Math.floor(Math.random() * 256);
  * This function returns a random rgb color e.g. rgb(17,98,178).
  * @returns {string}
  */
-let getRandomColor = () => `rgb(${getRandomRGB()},${getRandomRGB()},${getRandomRGB()})`
+let getRandomColor = () => `rgb(${getRandomRGB()},${getRandomRGB()},${getRandomRGB()})`;
 
 /*
  * This funtion prints the generated random quote to the web page.

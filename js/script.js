@@ -118,8 +118,7 @@ let getRandomColor = () => `rgb(${getRandomRGB()},${getRandomRGB()},${getRandomR
 function printQuote(){
   let randomQuote = getRandomQuote(quotes);
   let randomColor = getRandomColor();
-// Reset the timer every time user clicks the button
-  clearInterval(idleTimer);
+  clearInterval(idleTimer); // Reset the timer every time user clicks the button
 // Adding objects to the html using the element Id.
   let div = document.getElementById('quote-box');
   let html = `<p class="quote"> ${randomQuote.quote}</p>`
